@@ -195,18 +195,14 @@ class ImageResize
                 $this->fileStorageDatabase->saveFileToFilesystem($mediastoragefilename);
             }
             if ($this->mediaDirectory->isFile($originalImagePath)) {
-                try {
-                    foreach ($viewImages as $viewImage) {
-                        $this->resize($viewImage, $originalImagePath, $originalImageName);
-                    }
-                } catch (\Exception $e) {
-                    $error = $e->getMessage();
+                foreach ($viewImages as $viewImage) {
+                    $this->resize($viewImage, $originalImagePath, $originalImageName);
                 }
             } else {
                 $error = __('Cannot resize image "%1" - original image not found', $originalImagePath);
             }
 
-            yield ['filename' => $originalImageName, 'error' => (string) $error] => $count;
+            yield ['filename' => $originalImageName, 'error' => $error] => $count;
         }
     }
 
@@ -280,7 +276,6 @@ class ImageResize
      * @param string $originalImagePath
      * @param array $imageParams
      * @return Image
-     * @throws \InvalidArgumentException
      */
     private function makeImage(string $originalImagePath, array $imageParams): Image
     {

@@ -4,9 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace Magento\MediaStorage\Model\Config\Backend\Storage\Media;
-/**
-* @deprecated Database Media Storage is deprecated
-**/
+
 class Database extends \Magento\Framework\App\Config\Value
 {
     /**
